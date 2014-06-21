@@ -11,7 +11,7 @@ Match = namedtuple("Match", "home, away, result, status, date")
 
 class MatchFactory(object):
     def __init__(self):
-        self.soup = BeautifulSoup(urllib2.urlopen(URL).read(), "lxml")
+        self.soup = BeautifulSoup(urllib2.urlopen(URL).read())
         self.matches = []
 
         # Prevent double match entries by extracting specific DOM node from menu.
