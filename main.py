@@ -1,5 +1,6 @@
 from collections import namedtuple
 from itertools import chain
+import os
 import urllib2
 from bs4 import BeautifulSoup
 
@@ -10,7 +11,7 @@ Match = namedtuple("Match", "home, away, result, status, date")
 
 class MatchFactory(object):
     def __init__(self):
-        self.soup = BeautifulSoup(urllib2.urlopen(URL).read())
+        self.soup = BeautifulSoup(urllib2.urlopen(URL).read(), "lxml")
         self.matches = []
 
         # Prevent double match entries by extracting specific DOM node from menu.
@@ -28,8 +29,12 @@ class MatchFactory(object):
                                       ))
 
     def __iter__(self):
-        for match in self.matches:
-            yield match
+        """ Infinite generator. Updating it's state every iteration. """
+        while 1:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            for match in self.matches:
+                yield match
+            self.__init__()
 
 
 if __name__ == "__main__":
