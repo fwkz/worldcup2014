@@ -24,7 +24,7 @@ class MatchFactory(object):
             self.matches.append(Match(home=match.find(attrs={"class": "t home"}).find(attrs={"class": "t-nText"}).text,
                                       away=match.find(attrs={"class": "t away"}).find(attrs={"class": "t-nText"}).text,
                                       result=match.find(attrs={"class": "s-scoreText"}).text,
-                                      status=match.find(attrs={"class": "s-status-abbr"}).text,
+                                      status=match.find(attrs={"class": "s-status-abbr"}).text or "LIVE!",
                                       date=match.find(attrs={"class": "mu-i-datetime"}).text[:-11],
                                       ))
 
@@ -39,4 +39,4 @@ class MatchFactory(object):
 
 if __name__ == "__main__":
     for match in MatchFactory():
-        print match.date, match.home, match.result, match.away, match.status
+        print u"{} {}\n{} {} {}\n".format(match.date, match.status, match.home, match.result, match.away)
