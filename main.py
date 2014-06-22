@@ -24,7 +24,7 @@ class MatchFactory(object):
             self.matches.append(Match(home=match.find(attrs={"class": "t home"}).find(attrs={"class": "t-nText"}).text,
                                       away=match.find(attrs={"class": "t away"}).find(attrs={"class": "t-nText"}).text,
                                       result=match.find(attrs={"class": "s-scoreText"}).text,
-                                      status=match.find(attrs={"class": "s-status-abbr"}).text or "LIVE!",
+                                      status=match.find(attrs={"class": "s-status-abbr"}).text.strip() or "LIVE!",
                                       date=match.find(attrs={"class": "mu-i-datetime"}).text[:-11],
                                       ))
 
